@@ -343,7 +343,7 @@ const rulesDiscord = {
 	discordSlash: {
 		order: markdown.defaultRules.strong.order,
 		match: (source) => /^<\/([\w-]{1,32}):([\d]{16,22})>/.exec(source),
-		parse: function () {
+		parse: function (capture) {
 			return {
 				name: capture[1],
 				id: capture[2],
@@ -361,7 +361,7 @@ const rulesDiscord = {
 	discordTimestamp: {
 		order: markdown.defaultRules.strong.order,
 		match: (source) => /^<t:(\d+)(?::(R|t|T|d|D|f|F))?>/.exec(source),
-		parse: function () {
+		parse: function (capture) {
 			return {
 				timestamp: capture[1],
 				style: capture[2],
