@@ -155,11 +155,24 @@ const rules = {
 };
 
 const discordCallbackDefaults = {
+<<<<<<< Updated upstream
 	user: node => '@' + markdown.sanitizeText(node.id),
 	channel: node => '#' + markdown.sanitizeText(node.id),
 	role: node => '&' + markdown.sanitizeText(node.id),
 	everyone: () => '@everyone',
 	here: () => '@here'
+=======
+	user: (node) => "@" + markdown.sanitizeText(node.id),
+	channel: (node) => "#" + markdown.sanitizeText(node.id),
+	role: (node) => "&" + markdown.sanitizeText(node.id),
+	everyone: () => "@everyone",
+	here: () => "@here",
+	slash: (node) => "/" + markdown.sanitizeText(node.name),
+	timestamp: (node) =>
+		markdown.sanitizeText(
+			"<t:" + node.timestamp + +node.style ? ":" + node.style : "" + ">"
+		),
+>>>>>>> Stashed changes
 };
 
 const rulesDiscord = {
