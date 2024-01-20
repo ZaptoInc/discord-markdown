@@ -226,9 +226,9 @@ const discordCallbackDefaults = {
 	everyone: () => "@everyone",
 	here: () => "@here",
 	slash: (node) => "/" + markdown.sanitizeText(node.name),
-	timestamp: (node) =>
+	unix: (node) =>
 		markdown.sanitizeText(
-			"<t:" + node.timestamp + +node.style ? ":" + node.style : "" + ">"
+			"<t:" + node.timestamp + (node.style ? ":" + node.style : "") + ">"
 		),
 };
 
@@ -358,7 +358,7 @@ const rulesDiscord = {
 			);
 		},
 	},
-	discordTimestamp: {
+	discordUnix: {
 		order: markdown.defaultRules.strong.order,
 		match: (source) => /^<t:(\d+)(?::(R|t|T|d|D|f|F))?>/.exec(source),
 		parse: function (capture) {
@@ -370,8 +370,8 @@ const rulesDiscord = {
 		html: function (node, output, state) {
 			return htmlTag(
 				"span",
-				state.discordCallback.timestamp(node),
-				{ class: "d-timestamp" },
+				state.discordCallback.unix(node),
+				{ class: "d-unix" },
 				state
 			);
 		},
